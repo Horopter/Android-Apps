@@ -11,9 +11,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.w3c.dom.Text;
-
-import java.io.File;
 import java.util.ArrayList;
 
 /**
@@ -33,6 +30,8 @@ public class GridAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
+        if(result==null)
+            return 0;
         return result.size();
     }
 
@@ -45,36 +44,18 @@ public class GridAdapter extends BaseAdapter {
     public long getItemId(int position) {
         return position;
     }
-
-    public class Holder
-    {
-        TextView tv;
-        ImageView img;
-    }
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
-        Holder h = new Holder();
-        View v;
-        v = inflater.inflate(R.layout.program_list,null);
-        h.tv = (TextView) v.findViewById(R.id.tv1);
-        h.img = (ImageView) v.findViewById(R.id.iv1);
-        h.tv.setText(result.get(position));
-        //File fileObj = new  File(“/sdcard/Images/test_image.jpg”);
-        File fileObj = new  File(imageId.get(position));
-        if(fileObj.exists())
-        {
-            Bitmap bitMapObj= BitmapFactory.decodeFile(fileObj.getAbsolutePath());
-            //ImageView imgView= (ImageView) findViewById(R.id.imageviewTest);
-            //imgView.setImageBitmap(bitMapObj);
-            h.img.setImageBitmap(bitMapObj);
-        }
-        //else
-            //Toast.makeText(this.context,"Couldn't find required file",Toast.LENGTH_SHORT).show();
-        //h.img.setImageResource(imageId.get(position));
+        View v = inflater.inflate(R.layout.image_list,null);
+        TextView tv = (TextView) v.findViewById(R.id.tv1);
+        ImageView img = (ImageView) v.findViewById(R.id.iv1);
+        tv.setText(imageId.get(position));
+        Bitmap bmp = BitmapFactory.decodeFile(result.get(position));
+        img.setImageBitmap(bmp);
         v.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context,result.get(position),Toast.LENGTH_LONG).show();
+                Toast.makeText(context, imageId.get(position), Toast.LENGTH_SHORT).show();
             }
         });
         return v;

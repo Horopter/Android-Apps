@@ -4,10 +4,9 @@
     android:layout_height="match_parent">
 
     <ImageView
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:id="@+id/iv1"
-        android:src="@drawable/ts2"/>
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:id="@+id/iv1" />
 
     <TextView
         android:id="@+id/tv1"
